@@ -2,6 +2,9 @@ const express = require('express');
 const app = express();
 const dotenv = require('dotenv');
 dotenv.config();
+const userRoutes = require('./routes/auth.route');
+
+app.use('/api/v1/users', userRoutes);
 
 const port = process.env.PORT || 5660;
 
