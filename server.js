@@ -1,10 +1,17 @@
 const express = require('express');
 const app = express();
+const cors = require('cors');
+const cookieParser = require('cookie-parser');
 const dotenv = require('dotenv');
 dotenv.config();
 const userRoutes = require('./routes/auth.route');
 
 app.use(express.json());
+app.use(cookieParser());
+app.use(cors({
+    origin: ['http://localhost:3005'],
+    credentials: true
+}));
 
 
 app.use('/api/v1/users', userRoutes);
