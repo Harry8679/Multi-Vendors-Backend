@@ -2,9 +2,14 @@ const express = require('express');
 const app = express();
 const cors = require('cors');
 const cookieParser = require('cookie-parser');
+const mongoose = require('mongoose');
 const dotenv = require('dotenv');
 dotenv.config();
 const userRoutes = require('./routes/auth.route');
+const DBConnect = require('./config/db');
+
+
+DBConnect();
 
 app.use(express.json());
 app.use(cookieParser());
