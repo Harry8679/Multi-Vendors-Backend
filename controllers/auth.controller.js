@@ -10,9 +10,11 @@ const adminLogin = asyncHandler(async(req, res) => {
         const admin = await Admin.findOne({ email }).select('+password');
         console.log('admin', admin);
 
-        if (admin) {} else {};
+        if (admin) {} else {
+            responseReture(res, 404, { error: 'Email not found' });
+        };
     } catch (err) {
-        responseReture(res, 500, { error: error.message });
+        responseReture(res, 500, { error: err.message });
     };
 
     res.send('Hello from API');
