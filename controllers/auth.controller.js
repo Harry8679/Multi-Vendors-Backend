@@ -12,7 +12,11 @@ const adminLogin = asyncHandler(async(req, res) => {
         console.log('admin', admin);
 
         if (admin) {
-
+            const match = await bcrypt.compare(password, admin.password);
+            // console.log(match);
+            if (match) {
+                const token = await createToken({ id: admin.id, role: admin.role });
+            } else {}
         } else {
             responseReture(res, 404, { error: 'Email not found' });
         };
