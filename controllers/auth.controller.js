@@ -3,6 +3,7 @@ const Admin = require('../models/admin.model');
 const { responseReture } = require('../utiles/response.util');
 const bcrypt = require('bcrypt');
 const { createToken } = require('../utiles/tokenCreate.util');
+const { response } = require('express');
 
 const adminLogin = asyncHandler(async(req, res) => {
     // console.log('req.body', req.body);
@@ -17,7 +18,13 @@ const adminLogin = asyncHandler(async(req, res) => {
             // console.log(match);
             if (match) {
                 const token = await createToken({ id: admin.id, role: admin.role });
-            } else {}
+
+                res.cookie('accessToken', token, { expires: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000) });
+
+                responseReture(res, 200, { token, message: 'Login Success' });
+            } else {
+                responseReture(res, 404, { error: 'Password Wrong' });
+            }
         } else {
             responseReture(res, 404, { error: 'Email not found' });
         };
