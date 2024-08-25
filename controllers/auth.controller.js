@@ -1,6 +1,7 @@
 const asyncHandler = require('express-async-handler');
 const Admin = require('../models/admin.model');
 const { responseReture } = require('../utiles/response.util');
+const bcrypt = require('bcrypt');
 
 const adminLogin = asyncHandler(async(req, res) => {
     // console.log('req.body', req.body);
@@ -10,7 +11,9 @@ const adminLogin = asyncHandler(async(req, res) => {
         const admin = await Admin.findOne({ email }).select('+password');
         console.log('admin', admin);
 
-        if (admin) {} else {
+        if (admin) {
+
+        } else {
             responseReture(res, 404, { error: 'Email not found' });
         };
     } catch (err) {
