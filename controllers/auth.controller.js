@@ -35,4 +35,8 @@ const adminLogin = asyncHandler(async(req, res) => {
     res.send('Hello from API');
 });
 
-module.exports = { adminLogin }
+const registerUser = asyncHandler(async(req, res) => {
+    res.send('Register User');
+});
+
+module.exports = { adminLogin, registerUser };
